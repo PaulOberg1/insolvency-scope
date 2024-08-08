@@ -20,9 +20,11 @@ const LogInPage = () => {
             const result = await response.json();
             const token = result.access_token;
             localStorage.setItem("jwt",token);
+            console.log("success with login call");
             navigate("/map");
         }
         else {
+            console.error("couldn't do response");
             setError(true);
         }
     }

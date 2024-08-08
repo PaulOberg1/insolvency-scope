@@ -19,14 +19,13 @@ const SignUpPage = () => {
             body:JSON.stringify({
                 "username":username,
                 "password":password,
-                "email":email
             })
         });
         if (response.ok) {
             const result = await response.json();
             const token = result.access_token;
             localStorage.setItem("jwt",token);
-            navigate("/email");
+            navigate("/map");
         }
         else {
             const result = await response.json();
@@ -37,9 +36,6 @@ const SignUpPage = () => {
 
     return (
         <div>
-            <label>Enter your email</label>
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <br />
             <label>Username</label>
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <br />

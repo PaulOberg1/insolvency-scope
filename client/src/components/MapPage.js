@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import MapComponent from "./MapComponent";
 import PlanningComponent from "./PlanningComponent";
+import { jwtDecode } from 'jwt-decode';
 import { decode } from "polyline";
 
 //Use start/end pos to modify map
@@ -24,8 +25,7 @@ const MapPage = () => {
 
 
     const token = localStorage.getItem("jwt");
-    const decodedToken = decodeJwt(token);
-    const username = decodedToken.sub;
+    const username = jwtDecode(token).identity;
 
     return (
         <div>

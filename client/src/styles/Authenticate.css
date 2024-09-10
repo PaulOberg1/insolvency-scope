@@ -1,0 +1,68 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #344f58; /* Grey background */
+    color: #ffffff; /* White text color */
+}
+
+/* Style for form containers */
+#login_page, #signup_page {
+    background-color: #40e0d0; /* Turquoise background for the container */
+    border-radius: 15px; /* Rounded corners */
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    text-align: center;
+}
+
+/* Style for labels */
+#login_page label, #signup_page label {
+    display: block;
+    margin-bottom: 10px;
+    color: #008080; /* Dark blue text color for labels */
+}
+
+/* Style for input fields */
+#login_page input, #signup_page input {
+    width: calc(100% - 22px); /* Full width with padding adjustment */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #40e0d0; /* Turquoise border */
+    border-radius: 5px;
+    font-size: 16px;
+    color: #344f58; /* Grey text color */
+}
+
+/* Style for buttons */
+#login_page button, #signup_page button {
+    background-color: #ed980c; /* Orange background for buttons */
+    border: none;
+    color: white; /* White text color */
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+/* Button hover effect */
+#login_page button:hover, #signup_page button:hover {
+    background-color: #d57e07; /* Darker orange on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Button active effect */
+#login_page button:active, #signup_page button:active {
+    background-color: #b76704; /* Even darker orange when clicked */
+}
+
+/* Error message styling */
+.error-message {
+    color: #ed980c; /* Orange color for error messages */
+    margin-top: 10px;
+    font-size: 14px;
+}

@@ -1,105 +1,82 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect } from "react";
+import "../styles/MapComponent.css";
 
-const getLocation = async() => {
-    return new Promise((resolve,reject) => {
-        if ("geolocation" in navigator){
+// Helper function to get the user's current location
+const getLocation = async () => {
+    return new Promise((resolve, reject) => {
+        // Check if geolocation is available in the browser
+        if ("geolocation" in navigator) {
+            // Request the current position
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
+                    // Resolve the promise with latitude and longitude
                     resolve({
-                        "latitude":pos.coords.latitude,
-                        "longitude":pos.coords.longitude
+                        "latitude": pos.coords.latitude,
+                        "longitude": pos.coords.longitude
                     });
                 },
                 (error) => {
-                    reject(error)
+                    // Reject the promise with an error
+                    reject(error);
                 }
-            )
-        }
-        else {
+            );
+        } else {
+            // Reject if geolocation is not supported
             reject(new Error("Geolocation is not supported by this browser"));
-        }  
-    });
-}
-
-const MapComponent = ({mapHTML,setMapHTML,startPos,setStartPos,setEndPos,loading,setLoading,latitude,setLatitude,longitude,setLongitude}) => {
-
-    const getCoords = (e) => {
-        console.log("click detected at " +e.latlng.lat + e.atlng.long)
-        if (startPos) {
-            setEndPos(e.latlng.lat+","+e.latlng.long);
         }
-        else {
-            setStartPos(e.latlng.lat+","+e.latlng.long);
+    });
+};
+
+const MapComponent = ({
+    mapSrc, setMapSrc, startPos, setStartPos, setEndPos, loading, setLoading, latitude, setLatitude, longitude, setLongitude
+}) => {
+
+    // Handler to set start and end positions based on map clicks
+    const getCoords = (e) => {
+        if (startPos) {
+            // Set the end position if start position is already set
+            setEndPos(e.latlng.lat + "," + e.latlng.lng);
+        } else {
+            // Set the start position if not set
+            setStartPos(e.latlng.lat + "," + e.latlng.lng);
         }
     };
 
-    const fetchMapHTML = async () => {
-        try {
-            const response = await fetch("/map",{
-                method:["POST"],
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify({"latitude":latitude,"longitude":longitude})
-            });
-            if (response.ok) {
-                console.log("received map html");
-                const result = await response.text();
-                setMapHTML(result);
-                setLoading(false);
-                if (result) {
-                    console.log("valid conversion of map to text")
-                    
-                    if (mapHTML) {
-                        console.log("map html succesfully set");
-                    }
-                    
-                }
-            }
-            else {
-                console.log("Error sending/receiving lat/long data");
-            }
-        }
-        catch (error) {
-            console.log("Error fetching map data",error);
-        }
-    }
-
+    // Effect to update loading state when latitude and longitude are set
     useEffect(() => {
-        console.log("lat/long change identified");
-        if (latitude && longitude) {
-            console.log("lat/long valid, now getting map html")
-            fetchMapHTML();
+        if (latitude && longitude && loading) {
+            setLoading(false); // Set loading to false when coordinates are available
         }
-    }, [latitude,longitude])
+    }, [latitude, longitude, loading]);
 
+    // Effect to fetch and set the current location on component mount
     useEffect(() => {
-        const fetchLocation = async() => {
-            console.log("fetching loc at start of program")
+        const fetchLocation = async () => {
             try {
-                const response = await getLocation();
-                setLatitude(response.latitude);
-                setLongitude(response.longitude);
-            }
-            catch (error) {
-                console.error("Error fetching location",error?.message);
+                const response = await getLocation(); // Get the current location
+                setLatitude(response.latitude); // Set latitude
+                setLongitude(response.longitude); // Set longitude
+            } catch (error) {
+                console.error("Error fetching location:", error);
             }
         };
         fetchLocation();
-    },[]);
+    }, []); // Empty dependency array means this effect runs once on mount
 
     return (
         <div>
-            {loading && <p>Loading...</p>}
-            <div style={{position:"relative",width:"700px",height:"700px"}}>
-                <iframe
-                    title="Map of Local Area"
-                    srcDoc={mapHTML}
-                    style={{ width: "700px", height: "700px", border: "none" }}
-                    sandbox="allow-scripts"
-                ></iframe>
-                
-            </div>
+            {!loading && ( // Render the map only when loading is complete
+                <div>
+                    <iframe
+                        id="Map"
+                        title="Map of Local Area"
+                        src={mapSrc} // Source URL for the map
+                        // Additional attributes for iframe, e.g., for interactivity, can be added here
+                    ></iframe>
+                </div>
+            )}
         </div>
-    )
+    );
 };
 
 export default MapComponent;

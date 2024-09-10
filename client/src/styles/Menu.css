@@ -1,0 +1,91 @@
+
+/* General Styling for the Top Bar */
+#top-bar {
+    background: linear-gradient(145deg, #344f58, #40e0d0); /* Subtle gradient for a modern touch */
+    color: white; /* White text color */
+    display: flex;
+    justify-content: space-between; /* Space between title and dropdown */
+    align-items: center; /* Center items vertically */
+    padding: 15px; /* Padding around the top bar */
+    position: relative; /* Positioning context for the dropdown */
+    z-index: 2; /* Ensure it's above other content */
+}
+
+/* Hamburger Icon Styling */
+#hamburger-icon {
+    background-color: #40e0d0; /* Turquoise background */
+    border: none;
+    color: #ffffff; /* White text */
+    padding: 10px 15px;
+    font-size: 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hamburger Icon Hover Effect */
+#hamburger-icon:hover {
+    background-color: #008080; /* Dark blue background on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Dropdown Container */
+#AccountDropDown {
+    position: relative; /* Positioned relative to the top bar */
+}
+
+/* Dropdown Content Styling */
+#DropDownContent {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below the button */
+    right: 0;
+    width: 15vw; /* Narrow width (15% of viewport width) */
+    max-height: 60vh; /* Height limited to 60% of viewport height */
+    background-color: #008080; /* Turquoise background */
+    color: white; /* White text color */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better appearance */
+    overflow-y: auto; /* Scroll if content overflows */
+    transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+    transform: translateY(-20px); /* Start off 20px above the visible area */
+    opacity: 0; /* Start as invisible */
+    z-index: 3; /* Ensure it's above other content */
+    padding: 10px; /* Padding inside the dropdown */
+}
+
+/* Show dropdown content on click */
+#AccountDropDown.active #DropDownContent {
+    display: block;
+    transform: translateY(0); /* Move to its original position */
+    opacity: 1; /* Fully opaque */
+}
+
+/* Dropdown Content Styling */
+#DropDownContent p {
+    padding: 10px;
+    margin: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #40e0d0; /* Light turquoise border for separation */
+}
+
+/* Dropdown Buttons Styling */
+#DropDownContent button {
+    background-color: #ed980c; /* Orange background */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0; /* Vertical margin to stack buttons */
+    transition: background-color 0.3s, transform 0.3s;
+    width: calc(100% - 20px); /* Full width of dropdown minus padding */
+}
+
+/* Button Hover Effect */
+#DropDownContent button:hover {
+    background-color: #344f58; /* Dark grey background on hover */
+    color: #ffffff; /* White text on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}

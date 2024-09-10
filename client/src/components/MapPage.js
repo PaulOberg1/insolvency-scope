@@ -1,65 +1,59 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import MapComponent from "./MapComponent";
 import PlanningComponent from "./PlanningComponent";
-import { jwtDecode } from 'jwt-decode';
-import { decode } from "polyline";
+import "../styles/MapPage.css";
 
-//Use start/end pos to modify map
-function decodeJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-  
-    return JSON.parse(jsonPayload);
-}
 const MapPage = () => {
-    const [startPos,setStartPos] = useState("52.3793,1.5615");
-    const [endPos,setEndPos] = useState("51.5759,0.4212");
-    const [mapHTML,setMapHTML] = useState("");
-    const [loading,setLoading] = useState(true);
-    const [isPlanning,setIsPlanning] = useState(false);
-    const [latitude,setLatitude] = useState(null);
-    const [longitude,setLongitude] = useState(null);
+    // Log to indicate that the MapPage component is being loaded
+    console.log("map page loading");
 
+    // State variables to manage positions, loading state, and map source
+    const [startPos, setStartPos] = useState("52.3793,1.5615"); // Default start position
+    const [endPos, setEndPos] = useState("51.5759,0.4212");     // Default end position
+    const [loading, setLoading] = useState(true);                // Indicates if the map is loading
+    const [latitude, setLatitude] = useState(null);              // Latitude coordinate
+    const [longitude, setLongitude] = useState(null);            // Longitude coordinate
+    const [mapSrc, setMapSrc] = useState("http://localhost:5000/static/map.html"); // Initial map source
 
+    // Retrieve JWT token from local storage for potential authentication
     const token = localStorage.getItem("jwt");
-    const username = jwtDecode(token).identity;
 
     return (
-        <div>
-            <h1>Hi, {username}!</h1>
-            <MapComponent 
-            mapHTML={mapHTML} 
-            setMapHTML={setMapHTML} 
-            startPos={startPos} 
-            setStartPos={setStartPos}
-            setEndPos={setEndPos}
-            loading={loading}
-            setLoading={setLoading}
-            latitude={latitude}
-            setLatitude={setLatitude}
-            longitude={longitude}
-            setLongitude={setLongitude}
-            />
-            {!loading && <button onClick={() => setIsPlanning(true)}>Plan a journey?</button>}
-            {isPlanning && 
-            <PlanningComponent
-            setMapHTML={setMapHTML}
-            startPos={startPos}
-            setStartPos={setStartPos}
-            endPos={endPos}
-            setEndPos={setEndPos}
-            latitude={latitude}
-            setLatitude={setLatitude}
-            longitude={longitude}
-            setLongitude={setLongitude}
-            />}
+        <div id="MainPage">
+            {/* MapComponent: Displays the map */}
+            <div id="MapComponent">
+                <MapComponent 
+                    mapSrc={mapSrc}          // Source URL for the map
+                    setMapSrc={setMapSrc}    // Function to update the map source
+                    startPos={startPos}      // Start position for the route
+                    setStartPos={setStartPos} // Function to update the start position
+                    setEndPos={setEndPos}    // Function to update the end position
+                    loading={loading}        // Loading state for the map
+                    setLoading={setLoading}  // Function to update the loading state
+                    latitude={latitude}      // Latitude coordinate
+                    setLatitude={setLatitude} // Function to update the latitude
+                    longitude={longitude}    // Longitude coordinate
+                    setLongitude={setLongitude} // Function to update the longitude
+                />
+            </div>
 
+            {/* PlanningComponent: Allows user to plan a route and interact with the map */}
+            <div id="RouteBar">
+                <PlanningComponent
+                    mapSrc={mapSrc}          // Source URL for the map
+                    setMapSrc={setMapSrc}    // Function to update the map source
+                    startPos={startPos}      // Start position for the route
+                    setStartPos={setStartPos} // Function to update the start position
+                    endPos={endPos}          // End position for the route
+                    setEndPos={setEndPos}    // Function to update the end position
+                    latitude={latitude}      // Latitude coordinate
+                    setLatitude={setLatitude} // Function to update the latitude
+                    longitude={longitude}    // Longitude coordinate
+                    setLongitude={setLongitude} // Function to update the longitude
+                />
+            </div>
         </div>
-    )
-
+    );
 }
 
 export default MapPage;

@@ -1,0 +1,67 @@
+#MainPage {
+    background-color: #344f58; /* Grey background color */
+    position: relative; /* Ensure positioning context for child elements */
+    width: 100%; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Hide any overflow content */
+    padding: 0; /* Remove padding if it's not needed */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
+#MapComponent {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#RouteBar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 625px; /* Width of the square bar */
+    height: 625px; /* Height of the square bar */
+    background-color: #008080; /* Orange background color */
+    color: white; /* Text color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better appearance */
+    border-radius: 10px; /* Rounded corners */
+    border-width: 10px;
+    border-color: #344f58;
+}
+
+/* Styling for buttons */
+#RouteBar button {
+    background-color: #40e0d0; /* Turquoise background for button */
+    border: none;
+    color: #008080; /* Dark blue text color */
+    padding: 15px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#RouteBar button:hover {
+    background-color: #ed980c; /* Dark blue on hover */
+    color: #ffffff; /* White text on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+
+
+/* 344f58 - grey
+    ed980c - orange
+    40e0d0 - turquoise
+    008080 - dark blue
+    afeeee - light blue
+*/

@@ -1,0 +1,49 @@
+/* Styling for the instructions container */
+#instructions {
+    background-color: #afeeee; /* Light blue background */
+    color: #344f58; /* Grey text color */
+    border: 2px solid #008080; /* Dark blue border color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space inside the box */
+    width: 300px; /* Width of the container */
+    height: 400px; /* Fixed height with scroll */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for better appearance */
+}
+
+/* Styling for list items */
+#instructions li {
+    background-color: #ffffff; /* White background for list items */
+    color: #008080; /* Dark blue text color */
+    border: 1px solid #344f58; /* Grey border for list items */
+    border-radius: 8px; /* Rounded corners for list items */
+    padding: 15px; /* Padding inside list items */
+    margin-bottom: 10px; /* Space between list items */
+    list-style-type: none; /* Remove default list styling */
+    font-size: 16px; /* Font size for readability */
+    font-family: Arial, sans-serif; /* Font style */
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center content vertically */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for list items */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Hover effect for list items */
+#instructions li:hover {
+    background-color: #40e0d0; /* Turquoise background on hover */
+    color: #ffffff; /* White text color on hover */
+    transform: scale(1.02); /* Slightly larger on hover */
+    
+}
+
+/* Styling for the instructions header */
+#instructions h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 28px; /* Adjust font size for emphasis */
+    color: #ffffff; /* Title color for contrast */
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+    justify-content: center; /* Center align items vertically */
+
+}
+

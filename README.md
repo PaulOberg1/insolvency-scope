@@ -2,6 +2,8 @@
 
 **Co-Navigator** is a full-stack web application that helps users determine optimal COVID-safe travel routes by aggregating real-time COVID-19 data and visualizing it on an interactive map.
 
+![Screenshot](flask-server/app/static/image.png)
+
 ## Features:
 - Aggregates real-time COVID-19 case data from public APIs.
 - Displays an interactive choropleth map with COVID-risk visualizations.
